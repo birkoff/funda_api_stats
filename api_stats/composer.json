@@ -1,0 +1,12 @@
+{
+    "require": {
+        "silex/silex": "~2.0",
+        "doctrine/dbal": "~2.2",
+        "doctrine/orm": "^2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Funda\\": "src/"
+        }
+    }
+}
