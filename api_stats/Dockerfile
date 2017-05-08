@@ -20,10 +20,10 @@ COPY docker_files/www.conf /etc/php-fpm-7.0.d/www.conf
 COPY docker_files/bootstrap.sh /bootstrap.sh
 
 ## add application source file
-#ADD ./composer.json /var/www/funda_analytics_api
-#ADD ./web /var/www/funda_analytics_api/web
-#ADD ./src /var/www/funda_analytics_api/src
-#RUN cd /var/www/funda_analytics_api && /usr/bin/composer install
+ADD ./composer.json /var/www/funda_analytics_api
+ADD ./web /var/www/funda_analytics_api/web
+ADD ./src /var/www/funda_analytics_api/src
+RUN cd /var/www/funda_analytics_api && /usr/bin/composer install
 
 RUN echo "NETWORKING=yes" > /etc/sysconfig/network
 

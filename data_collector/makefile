@@ -1,5 +1,5 @@
 build:
-	docker build -t birkoffh/fundassigment .
+	sudo docker build -t birkoffh/fundassigment .
 
 run:
-	docker run -i birkoffh/fundassigment
+	sudo docker run -i birkoffh/fundassigment
