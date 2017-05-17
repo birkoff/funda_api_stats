@@ -112,7 +112,7 @@ class FundaApiHandler:
 
 
 class DataCollector:
-	MAX_PAGES = 120
+	MAX_PAGES = 90
 
 	def __init__(self, api, repository):
 		self.repository = repository
@@ -168,18 +168,20 @@ class DataCollector:
 		except Exception as e:
 			print "DB Error: {0}".format(e)
 
-db_config = {}
-db_config['DB_HOSTNAME'] = os.environ.get('DB_HOSTNAME')
-db_config['DB_USERNAME'] = os.environ.get('DB_USERNAME')
-db_config['DB_PASSWORD'] = os.environ.get('DB_PASSWORD')
-db_config['DB_NAME'] = os.environ.get('DB_NAME')
-db_config['DB_TABLE'] = os.environ.get('DB_TABLE')
+## This si for AWS Handler: data_collector.lambda_handler, Add the following env variables
+def lambda_handler(event, context):
+	db_config = {}
+	db_config['DB_HOSTNAME'] = os.environ.get('DB_HOSTNAME')
+	db_config['DB_USERNAME'] = os.environ.get('DB_USERNAME')
+	db_config['DB_PASSWORD'] = os.environ.get('DB_PASSWORD')
+	db_config['DB_NAME'] = os.environ.get('DB_NAME')
+	db_config['DB_TABLE'] = os.environ.get('DB_TABLE')
 
-api_key = os.environ.get('API_KEY')
+	api_key = os.environ.get('API_KEY')
 
-dataCollector = DataCollector(FundaApiHandler(api_key), DbRepository(db_config))
-dataCollector.search_and_collect('amsterdam')
-dataCollector.search_and_collect('amsterdam/tuin')
+	dataCollector = DataCollector(FundaApiHandler(api_key), DbRepository(db_config))
+	dataCollector.search_and_collect('amsterdam')
+	dataCollector.search_and_collect('amsterdam/tuin')
 
 ## NOTE: Below are examples of how can we use different repositories to store the collected data
 ## We can add another type of API as well

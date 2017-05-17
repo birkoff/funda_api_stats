@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Parameters:
+  DbHOSTNAME:
+    Type: String
+  DbUSERNAME:
+    Type: String
+  DbPASSWORD:
+    Type: String
+  DbNAME:
+    Type: String
+  DbTABLE:
+    Type: String
+  ApiKEY:
+    Type: String
+  Environment:
+    Type: String
+    AllowedValues:
+      - test
+      - production
+  LambdaFunctionS3Bucket:
+    Type: String
+  LambdaFunctionS3Key:
+    Type: String
+  LambdaRuntime:
+    Type: String
+    Default: 'python2.7'
+  LambdaTimeout:
+    Type: String
+    Default: 300
+  LambdaHandler:
+    Type: String
+    Default: 'data_collector.lambda_handler'
+  TemplateBucket:
+    Type: String
+  TemplatePath:
+    Type: String
+
+Transform:
+  Name: 'AWS::Include'
+  Parameters:
+    Location: !Sub "s3://${TemplateBucket}/${TemplatePath}/${Environment}/shared/DataCollector.yaml"
